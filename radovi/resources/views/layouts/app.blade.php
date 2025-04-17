@@ -30,7 +30,7 @@
         @endisset
 
         <!-- Page Content -->
-        <main>
+        <main class="ms-4">
             {{ $slot }}
         </main>
     </div>

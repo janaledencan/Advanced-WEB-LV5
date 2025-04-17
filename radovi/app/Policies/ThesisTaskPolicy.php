@@ -7,6 +7,15 @@ use App\Models\ThesisTask;
 
 class ThesisTaskPolicy
 {
+    /**
+     * Allow professors to manage only their own thesis tasks - for approving student on thesis.
+     */
+    public function manage(User $user, ThesisTask $task): bool
+    {
+        return $user->role === 'professor' && $task->teacher_id === $user->id;
+    }
+
+
     public function viewAny(User $user)
     {
         return in_array($user->role, ['admin', 'professor']);

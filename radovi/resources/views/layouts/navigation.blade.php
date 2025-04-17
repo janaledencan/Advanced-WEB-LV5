@@ -15,6 +15,18 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+
+                    @auth
+                    @if(auth()->user()->role === 'admin')
+                    <a href="{{ route('users.index') }}" class="nav-link mt-6">{{ __('Users') }}</a>
+                    @elseif(auth()->user()->role === 'professor')
+                    <a href="{{ route('thesis-tasks.index') }}" class="nav-link mt-6">{{ __('messages.my_thesis_tasks') }}</a>
+                    <a href="{{ route('thesis-tasks.create') }}" class="nav-link mt-6">{{ __('messages.create_thesis_task') }}</a>
+                    <a href="{{ route('thesis-tasks.applications') }}" class="nav-link mt-6">{{ __('messages.thesis_applications') }}</a>
+                    @elseif(auth()->user()->role === 'student')
+                    <a href="{{ route('thesis-tasks.available') }}" class="nav-link mt-6">{{ __('messages.available_thesis_tasks') }}</a>
+                    @endif
+                    @endauth
                 </div>
             </div>
 
@@ -43,7 +55,7 @@
                             @csrf
 
                             <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
+                                onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
@@ -89,7 +101,7 @@
                     @csrf
 
                     <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
+                        onclick="event.preventDefault();
                                         this.closest('form').submit();">
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>

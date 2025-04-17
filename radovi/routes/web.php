@@ -35,9 +35,6 @@ Route::middleware(['checkRole:professor'])->group(function () {
         'create' => 'thesis-tasks.create',
         'store' => 'thesis-tasks.store',
         'show' => 'thesis-tasks.show',
-        'edit' => 'thesis-tasks.edit',
-        'update' => 'thesis-tasks.update',
-        'destroy' => 'thesis-tasks.destroy'
     ]);
 
     Route::get('/applications', [ThesisTaskController::class, 'applications'])
@@ -55,8 +52,6 @@ Route::middleware(['checkRole:student'])->group(function () {
     Route::post('/apply/{task}', [ThesisTaskController::class, 'apply'])
         ->name('thesis-tasks.apply');
 });
-
-
 
 
 require __DIR__ . '/auth.php';

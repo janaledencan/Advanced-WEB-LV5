@@ -18,7 +18,7 @@
 
         @if(($thesisTasks ?? collect())->count() > 0)
         <div class="bg-white rounded shadow-md overflow-hidden">
-            <table class="w-full">
+            <table class="w-full text-center">
                 <thead class="bg-gray-100">
                     <tr>
                         <th class="px-4 py-2 text-left">{{ __('messages.thesis_title') }} (EN)</th>
@@ -30,16 +30,16 @@
                 <tbody>
                     @foreach($thesisTasks as $task)
                     <tr class="border-t">
-                        <td class="px-4 py-3">
+                        <td class="px-4 py-3 text-center align-middle">
                             {{ $task->title_en ?? ($task->title['en'] ?? '') }}
                         </td>
-                        <td class="px-4 py-3">
+                        <td class="px-4 py-3 text-center align-middle">
                             {{ $task->title_hr ?? ($task->title['hr'] ?? '') }}
                         </td>
-                        <td class="px-4 py-3">
+                        <td class="px-4 py-3 text-center align-middle">
                             {{ __('messages.' . $task->study_type) }}
                         </td>
-                        <td class="px-4 py-3">
+                        <td class="px-4 py-3 text-center align-middle">
                             {{ method_exists($task, 'applications') && $task->applications ? $task->applications->count() : 0 }}
                         </td>
                     </tr>

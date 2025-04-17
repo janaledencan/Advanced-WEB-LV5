@@ -11,7 +11,7 @@ class LanguageController extends Controller
 
         if (in_array($lang, ['en', 'hr'])) {
             session(['locale' => $lang]);
-            app()->setLocale($lang);
+            // app()->setLocale($lang);
         }
 
         return redirect()->back();
