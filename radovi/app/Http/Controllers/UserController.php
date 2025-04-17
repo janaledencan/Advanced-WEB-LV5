@@ -17,9 +17,8 @@ class UserController extends Controller
     //Azuriranje uloge odredenog usera
     public function updateRole(Request $request, User $user)
     {
-        // dd($user);
         $request->validate([
-            'role' => 'required|in:admin, professor,student',
+            'role' => 'required|in:admin,professor,student',
         ]);
         $user->update(['role' => $request->role]);
         return redirect()->route('users.index')->with('success', 'Role updated successfully.');

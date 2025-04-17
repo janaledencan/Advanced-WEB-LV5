@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use App\Http\Middleware\SetLocale;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -11,17 +12,19 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
-        // // Register middleware 
+
+        $middleware->append(SetLocale::class);
+        // Register middleware 
         $middleware->alias([
             'admin' => \App\Http\Middleware\AdminMiddleware::class,
-        ]);
+            'checkRole' => \App\Http\Middleware\CheckRole::class
 
-        // // Apply to groups
-        // $middleware->web(append: [
-        //     \App\Http\Middleware\AdminMiddleware::class,
-        // ]);
+        ]);
     })
+    ->withProviders([
+        App\Providers\AppServiceProvider::class,
+        App\Providers\AuthServiceProvider::class,
+    ])
     ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();

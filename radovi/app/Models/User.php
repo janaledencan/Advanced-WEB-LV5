@@ -4,8 +4,11 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+
+use App\Models\ThesisTask;
 
 class User extends Authenticatable
 {
@@ -45,5 +48,17 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function applications()
+    {
+        return $this->belongsToMany(ThesisTask::class, 'thesis_task_user')
+            ->withPivot('approved')
+            ->withTimestamps();
+    }
+
+    public function thesisTasks(): HasMany
+    {
+        return $this->hasMany(ThesisTask::class, 'teacher_id');
     }
 }

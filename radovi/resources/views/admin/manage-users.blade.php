@@ -27,7 +27,7 @@
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->role }}</td>
                     <td>
-                        <form action="{{ route('users.role.update', $user->id) }}" method="POST">
+                        <form action="{{ route('users.role.update', $user) }}" method="POST">
                             @csrf
                             @method('PATCH')
                             <select name="role" class="form-select">
